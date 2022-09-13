@@ -1,7 +1,9 @@
 <?php
+
+/** @var app\models\RegistrationForm $model **/
+
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
-/** @var app\models\RegistrationForm $model **/
 
 ?>
 <div class="container">
@@ -12,7 +14,6 @@ use yii\bootstrap4\Html;
     <div class="col-lg-4 offset-lg-4">
         <?php $form = ActiveForm::begin(
             [
-                'id' => 'login-form',
                 'fieldConfig' => [
                     'labelOptions' => ['class' => 'font-weight-light'],
                     'inputOptions' => ['class' => 'form-control']
@@ -27,9 +28,10 @@ use yii\bootstrap4\Html;
                 <?= $form->field($model, 'email')->input('email')?>
                 <?= $form->field($model, 'login')->textInput()?>
                 <?= $form->field($model, 'password')->passwordInput()?>
+                <?= $form->field($model, 'confirmPassword')->passwordInput()?>
             </div>
-
-            <?= Html::submitButton('Sign up', ['class' => 'btn btn-success btn-block', 'name' => 'login-button'])?>
+            <?=Html::submitButton('Sign up', ['class' => 'btn btn-success btn-block'])?>
         </form>
         <?php $form = ActiveForm::end();?>
+    </div>
 </div>

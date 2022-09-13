@@ -1,35 +1,15 @@
-<?php
-
-/** @var yii\web\View $this */
-
-use yii\helpers\Html;
-?>
-<!--Authentication page-->
-<div class="container">
-    <div class="container" style="margin-top: 5%;">
-        <?php if (!Yii::$app->user->isGuest) : ?>
-            <div class="col-lg-6 offset-lg-3 text-center">
-                <h1 class="font-weight-light text-uppercase">Welcome <?= Yii::$app->user->identity->login ?></h1>
-                <hr class="my-1">
+<div class="site-index">
+    <div class="body-content">
+        <div class="row">
+            <div class="col-lg-12 text-left" style="margin-top: 2%">
+                <h5>Задача: Необходимо создать сервис для хранения и подачи объявлений. Объявления должны храниться в базе данных. Сервис должен предоставлять API, работающее поверх HTTP в формате JSON.</h5><br>
+                <p><a class="btn btn-lg btn-outline-dark btn-block" href="api">API</a></p>
+                <p><a class="btn btn-lg btn-outline-success btn-block" href="ad">Стена с объявлениями</a></p>
+                <p><a class="btn btn-lg btn-outline-success btn-block" href="ad/add-ad">Добавление объявления</a></p>
+                <p><a class="btn btn-lg btn-outline-dark btn-block" href="ad/add-ad">Авторизация и регистрация</a></p>
             </div>
-            <div class="col-lg-6 offset-lg-3 text-center">
-                <?= Html::beginForm(['/site/logout'],'post')
-                    .Html::submitButton('Logout ('.Yii::$app->user->identity->login.') ',
-                    [
-                        'class' => 'btn btn-outline-dark btn-block',
-                        'style' => 'margin-top: 5%;',
-                    ]) ?>
-            </div>
-        <?php else : ?>
-            <div class="col-lg-4 offset-lg-4 text-center">
-                <h1 class="font-weight-light text-uppercase">Please login</h1>
-                <hr class="my-1">
-                <?= Html::a('Login', 'index.php?r=site%2Flogin',
-                    [
-                        'class' => 'btn btn-outline-dark btn-block',
-                        'style' => 'margin-top: 5%;',
-                    ]) ?>
-            </div>
-        <?php endif; ?>
+        </div>
     </div>
 </div>
+
+

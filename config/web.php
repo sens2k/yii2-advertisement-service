@@ -11,12 +11,19 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Api',
+        ],
+    ],
+
     'components' => [
-
-
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '5Gr4NKOodqOuBGv_GfKBi_sRVumVGGk4',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -30,11 +37,17 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'senspubg@gmail.com',
+                'password' => 'qyinwyekcdtuqlrd',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
         ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -44,12 +57,28 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+
+        'db' => $db
+        ,
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/ad',
+                    'pluralize' => false,
+                ],
+            ],
+        ],
 
         'authManager' =>
         [
             'class' => 'yii\rbac\DbManager',
-        ]
+        ],
+
+
     ],
     'params' => $params,
 ];

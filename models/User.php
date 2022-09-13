@@ -5,16 +5,19 @@ use yii\db\ActiveRecord;
 use Yii;
 
 /**
- *
- * @property integer $id
+ * @property string $name [TEXT]
+ * @property string $surname [TEXT]
+ * @property string $email [TEXT]
  * @property string $login [TEXT]
- * @property string $password [TEXT]
- * @property-read string $authKey
- * @property string $auth_key [TEXT]
  */
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
+
+    public function getAds()
+    {
+        return $this->hasMany(Ad::class, ['user _id' => 'id']);
+    }
 
     public static function tableName()
     {
@@ -44,7 +47,18 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByLogin($login)
     {
-        return static::findOne(['login' => $login] || ['email' => '$login']);
+        return static::findOne(['login' => $login]);
+    }
+
+    public static function findByUsername($name)
+    {
+        return static::findOne(['name' => $name]);
+    }
+
+
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email]);
     }
 
     /**
@@ -71,6 +85,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return $this->auth_key === $authKey;
     }
 
+
     /**
      * Validates password
      *
@@ -85,4 +100,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
+
+
+
+
 }

@@ -9,7 +9,6 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\RegistrationForm;
-use app\models\PassForm;
 
 class SiteController extends Controller
 {
@@ -80,7 +79,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect('index');
         }
 
         $model->password = '';
@@ -105,10 +104,10 @@ class SiteController extends Controller
     {
         $model = new RegistrationForm();
 
-        if($model->load(Yii::$app->request->post()) && $model->save()){
-            return $this->redirect('index.php?r=site%2Findex');
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            if($model->save()) return $this->redirect('index');
         }
-
         return $this->render('signup', ['model' => $model]);
     }
+
 }

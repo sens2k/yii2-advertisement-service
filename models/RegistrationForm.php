@@ -14,13 +14,14 @@ class RegistrationForm extends Model
     public $email;
     public $login;
     public $password;
-
+    public $confirmPassword;
 
     public function attributeLabels()
     {
         return [
             'firstName' => 'First name',
             'secondName' => 'Second name',
+            'confirmPassword' => 'Confirm your password'
         ];
     }
 
@@ -29,7 +30,7 @@ class RegistrationForm extends Model
         return [
 
             [['firstName', 'secondName', 'email', 'login'], 'trim'],
-            [['firstName', 'secondName', 'email', 'login', 'password'], 'required'],
+            [['firstName', 'secondName', 'email', 'login', 'password', 'confirmPassword'], 'required'],
 
             ['firstName', 'string', 'min' => 2, 'max' => 40],
             ['secondName', 'string', 'min' => 2, 'max' => 40],
@@ -38,13 +39,15 @@ class RegistrationForm extends Model
             ['email', 'string', 'max' => 255],
 
             ['password', 'string', 'min'=> 6, 'max' => 255],
+            ['confirmPassword', 'compare', 'compareAttribute'=>'password', 'message' => 'Invalid password, try again'],
 
             [['email', 'login'], 'unique', 'targetClass' => User::className()]
 
         ];
     }
 
-    public  function save()
+
+    public function save()
     {
         if($this->validate())
         {
@@ -55,8 +58,8 @@ class RegistrationForm extends Model
             $user->login = $this->login;
             $user->created_at = $time = time();
             $user->updated_at = $time;
-            $user->auth_key = Yii::$app->security->generateRandomString();
-            $user->password = Yii::$app->security->generatePasswordHash($this->password);
+            $user->auth_key = Yii::$app->getSecurity()->generateRandomString();
+            $user->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
 
             return $user->save();
 
