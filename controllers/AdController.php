@@ -69,11 +69,10 @@ class AdController extends Controller
         return $this->render('create', ['model' => $model]);
     }
 
-    public function actionShowAd()
+
+    public function actionView($id)
     {
-        $id = Yii::$app->request->get('id');
-        if($id) $ad = Ad::findOne(['id'=>$id]);
-        else return $this->redirect(['ad/index']);
+        $ad = Ad::findOne(['id'=>$id]);
         return $this->render('page', ['ad' => $ad]);
     }
 

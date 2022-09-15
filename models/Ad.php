@@ -9,4 +9,9 @@ class Ad extends ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    public function fields()
+    {
+        return ['id', 'name', 'description', 'price'];
+    }
 }

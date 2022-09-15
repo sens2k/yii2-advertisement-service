@@ -45,7 +45,7 @@ use yii\widgets\Pjax;
                 <div class="col-lg-6"><?= Html::encode('Date create : '.date('d-m-y', $ad->created_at))?></div>
             </div>
             <div class="card-footer bg-transparent border-success">
-                <th><?= Html::a('Show ad', Url::to(['/ad/show-ad', 'id' => $ad->id]), ['class' => 'btn btn-outline-success']) ?></th>
+                <th><?= Html::a('Show ad', Url::to(['/ad/view', 'id' => $ad->id]), ['class' => 'btn btn-outline-success']) ?></th>
             </div>
         </div>
     </div>

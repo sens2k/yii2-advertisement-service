@@ -6,7 +6,7 @@
                 <p><a class="btn btn-lg btn-outline-dark btn-block" href="api">API</a></p>
                 <p><a class="btn btn-lg btn-outline-success btn-block" href="ad">Стена с объявлениями</a></p>
                 <p><a class="btn btn-lg btn-outline-success btn-block" href="ad/add-ad">Добавление объявления</a></p>
-                <p><a class="btn btn-lg btn-outline-dark btn-block" href="ad/add-ad">Авторизация и регистрация</a></p>
+                <p><a class="btn btn-lg btn-outline-dark btn-block" href="site/login">Авторизация и регистрация</a></p>
             </div>
         </div>
     </div>

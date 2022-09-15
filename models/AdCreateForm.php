@@ -14,8 +14,8 @@ class AdCreateForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => 'AdController name',
-            'description' => 'AdController description',
+            'name' => 'Ad name',
+            'description' => 'Ad description',
         ];
     }
 
