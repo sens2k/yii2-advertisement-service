@@ -46,7 +46,7 @@ AppAsset::register($this);
                     <?php else : ?>
                         <?=
                             /*profile*/
-                            '<li class="nav-item">'.Html::a('Profile', '/profile', ['class' => 'nav-link active']) .'</li>',
+                            '<li class="nav-item">'.Html::a('Profile', ['/profile', 'id' => Yii::$app->user->id], ['class' => 'nav-link active']) .'</li>',
 
                             /*logout*/
                             '<li class="nav-item">'.Html::beginForm(['/site/logout'],'post', ['class' => 'form-inline'])

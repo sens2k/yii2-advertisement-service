@@ -9,6 +9,8 @@ use Yii;
  * @property string $surname [TEXT]
  * @property string $email [TEXT]
  * @property string $login [TEXT]
+ * @property string $id [TEXT]
+ * @property string $auth_key [TEXT]
  */
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
@@ -41,14 +43,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
-    /**
-     * Finds user by login
-     *
-     */
-    public static function findByLogin($login)
-    {
-        return static::findOne(['login' => $login]);
-    }
 
     public static function findByUsername($name)
     {
@@ -67,6 +61,11 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
