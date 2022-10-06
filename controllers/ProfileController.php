@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ChangePassword;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use app\models\Ad;
@@ -16,10 +17,10 @@ class ProfileController extends Controller
             'access' =>
             [
                 'class' => AccessControl::className(),
-                'only' => ['index'],
+                'only' => ['index', 'change-password'],
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'change-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -32,6 +33,16 @@ class ProfileController extends Controller
     {
         $ads = Ad::findAll(['user_id' => $id]);
         return $this->render('index', ['ads' => $ads]);
+    }
+
+
+    public function actionChangePassword()
+    {
+        $model = new ChangePassword();
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            if($model->changePassword()) return $this->goBack();
+        }
+        return $this->render('changePassword', ['model' => $model]);
     }
 
 }
